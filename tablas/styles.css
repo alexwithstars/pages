@@ -1,0 +1,110 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+}
+body{
+    width:100vw;
+    height:100vh;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    background: #ccc;
+    gap: 50px;
+    overflow-x: hidden;
+}
+body > *{
+    flex-shrink: 0;
+}
+
+.tit{
+    font-size: 32px;
+    letter-spacing: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
+    color: #fffa;
+    margin-top: 50px;
+    text-shadow: 0px 0px 10px #0004;
+}
+#cal{
+    --he: 60px;
+    width:400px;
+    height:var(--he);
+    border-radius: calc(var(--he) / 2);
+    border: none;
+    outline: none;
+    background: #eee;
+    color: #222;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    font-family: monospace;
+    box-shadow: inset 5px 5px 5px #fff,inset -5px -5px 5px #1114,-5px -5px 10px #fff8,5px 5px 10px #0004;
+}
+#cal::placeholder{
+    transition: color 0.5s;
+    color: #2224;
+}
+#cal:focus::placeholder{
+    color: transparent;
+}
+#cal::-webkit-inner-spin-button,#cal::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+.res{
+    min-width: 300px;
+    height:300px;
+    background: #eee;
+    box-shadow: inset 5px 5px 5px #fff,inset -5px -5px 5px #1114,-5px -5px 10px #fff8,5px 5px 10px #0004;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: monospace;
+    white-space: nowrap;
+    overflow-x: auto;
+    font-weight: 600;
+    font-size: 20px;
+    color: #000a;
+    padding: 30px;
+    margin: 15px;
+    margin-top: 0;
+    margin-bottom: 30px;
+    letter-spacing: 5px;
+    overflow: hidden;
+}
+.res > span{
+    color: #484;
+}
+.results{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding:0 15px;
+    justify-content: space-evenly;
+    min-height: 300px;
+}
+.error{
+    --he:60px;
+    height: var(--he);
+    width: 350px;
+    color: #f008;
+    display: flex;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace;
+    font-weight: 600;
+    font-size: 18px;
+    box-shadow: -3px -3px 5px #faa8,
+                inset 3px 3px 3px #faa8,
+                3px 3px 5px #833a,
+                inset -3px -3px 5px #833a;
+    border-radius: calc(var(--he) / 2);
+    background: #f99;
+}
+.show{
+    display: flex;
+}

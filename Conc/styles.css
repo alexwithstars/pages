@@ -1,0 +1,295 @@
+/* Default */
+*{
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+    transition: background 0.3s,color 0.1s;
+}
+
+/* Load screen */
+.load-screen{
+    position: fixed;
+    z-index: 200;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+}
+.load-text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 54px;
+    text-shadow: 0 0 15px;
+    font-family: sans-serif;
+    letter-spacing: 10px;
+    overflow: hidden;
+    color: #ddd;
+    & > p{
+        & > span{
+            color: #f00;
+        }
+        padding: 0 15px;
+    }
+    &::after{
+        content: '';
+        height: 5px;
+        width: 100%;
+        background: #ddd;
+        box-shadow: 0 0 5px #ddd;
+    }
+}
+
+/* Load screen :: animations */
+.text-loading::after{
+    animation: loading 2s linear infinite;
+}
+@keyframes loading {
+    0%{
+        transform: translate(-150%);
+    }
+    25%{
+        transform: translate(150%);
+    }
+    100%{
+        transform: translate(150%);
+    }
+}
+.fadeout{
+    animation: loadingFadeout 1s forwards;
+}
+@keyframes loadingFadeout {
+    to{
+        opacity: 0;
+    }
+}
+.done{
+    display:none;
+}
+
+/* Fonts */
+@font-face {
+    font-family: Raleway;
+    src: url("assets/fonts/Raleway-VariableFont_wght.ttf");
+    font-display: swap;
+}
+@font-face {
+    font-family: Audi;
+    src: url("assets/fonts/AudiType-Normal_03.ttf");
+    font-display: swap;
+}
+
+
+/* Themes */
+.dark-mode{
+    --primary-back: #000;
+    --primary-text: #ddd;
+    --navbar: #0a0a0a;
+}
+.bright-mode{
+    --primary-back: #ddd;
+    --primary-text: #000;
+    --navbar: #eee;
+}
+
+
+/* Body */
+body{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--primary-back);
+    color: var(--primary-text);
+    background-attachment: fixed;
+}
+:root{
+    scroll-behavior: smooth;
+}
+.index{
+    cursor: pointer;
+}
+body::-webkit-scrollbar{
+    width: 8px;
+    height: 8px;
+}
+body::-webkit-scrollbar-thumb{
+    background: #222;
+    border-radius: 100px;
+}
+body::-webkit-scrollbar-corner{
+    background: var(--navbar);
+}
+
+/* Navbar */
+.header{
+    position: fixed;
+    top: 0;
+    z-index: 20;
+    width: 100%;
+}
+.navbar{
+    --nav-he: 80px;
+    height: var(--nav-he);
+    display: flex;
+    justify-content: space-between;
+    background: var(--navbar);
+    transition: backdrop-filter 0.3s,background 0.3s;
+}
+
+/* Navbar :: on top */
+.navbar-top{
+    background: transparent;
+    color: #ddd;
+    backdrop-filter: blur(5px);
+    & .navbar-logo-text{
+        color: #ddd;
+    }
+}
+/* Navbar :: brand */
+.navbar-brand{
+    display: flex;
+    user-select: none;
+}
+.navbar-logo-cont{
+    height: 100%;
+    aspect-ratio: 3/2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navbar-logo-img{
+    height: 80%;
+    width: calc(var(--nav-he));
+    object-fit: contain;
+    mix-blend-mode: difference;
+}
+.navbar-brand-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: audi, sans-serif;
+    font-weight: 600;
+    font-size: 32px;
+    letter-spacing: 3px;
+    & > span{
+        color: #f00;
+    }
+}
+
+/* Navbar :: items */
+.navbar-links-items{
+    list-style-type: none;
+    display: flex;
+    height: 100%;
+    font-family: audi,sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+.navbar-links-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: text-shadow 0.3s ;
+    overflow: hidden;
+    &::after{
+        content: '';
+        display: block;
+        width: 100%;
+        height: 2px;
+        transform: translate(-101%);
+        background: var(--primary-text);
+        transition: transform 0.3s, width 0.3s;
+    }
+}
+.navbar-links-item:hover{
+    text-shadow: 0 0 5px;
+    &::after{
+        transform: none;
+    }
+}
+
+/* First background */
+.header-back{
+    position: absolute;
+    z-index: -1;
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(90deg,#111,transparent,#111),url("assets/images/headlights.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+/* First glance content */
+.first-glance{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    user-select: none;
+}
+.first-glance > section{
+    width: 40%;
+    height: 100%;
+}
+.first-title{
+    padding-left: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+    
+}
+.title{
+    backdrop-filter: blur(2px);
+    border-radius: 15px;
+    font-family: audi,sans-serif;
+    font-size: 54px;
+    color: #ddd;
+    text-shadow: 0 0 5px #000;
+    & > span{
+        color: #7af;
+    }
+}
+.title-text{
+    width: 70%;
+    color: #ddd;
+    font-size: 18px;
+    font-family: audi,sans-serif;
+    & > span{
+        font-weight: 600;
+        color: #69f;
+        text-shadow: 0 0 1px;
+    }
+}
+.down-arrow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.down-img{
+    filter: drop-shadow(0 0 5px #ddd);
+    width: 180px;
+    animation: upDown 1.5s infinite alternate-reverse ease-in-out;
+}
+@keyframes upDown {
+    from{
+        transform: translateY(5%);
+    }
+    to{
+        transform: translateY(-5%);
+    }
+}
+
+/* Highlights */
+.highlights{
+    height: 60vh;
+    width: 100%;
+    background: var(--primary-back);
+}
