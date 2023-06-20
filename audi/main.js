@@ -64,7 +64,7 @@ firstParallax.observe(ref)
 const index = qsa(".index")
 index.forEach(entrie => {
     entrie.addEventListener("click",()=>{
-        window.location.assign("index.html")
+        window.location.assign("./")
     })
 })
 
@@ -72,10 +72,10 @@ index.forEach(entrie => {
 const list = qsa(".navbar-links-item")
 list.forEach(entrie=>{
     entrie.addEventListener("click",(e)=>{
-        window.location.assign(`index.html#${e.target.attributes.data.value}`)
+        window.location.assign(`./#${e.target.attributes.data.value}`)
     })
 })
 const down = qs(".down-img")
 down.addEventListener("click",()=>{
-    window.location.assign("index.html#highlights")
+    window.location.assign("./#highlights")
 })
