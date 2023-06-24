@@ -3,7 +3,7 @@
     padding:0;
     margin:0;
     box-sizing:border-box;
-    transition: background 0.3s,color 0.1s;
+    transition: background-color 0.3s,color 0.1s;
 }
 
 /* Load screen */
@@ -221,7 +221,7 @@ body::-webkit-scrollbar-corner{
     z-index: -1;
     height: 100vh;
     width: 100%;
-    background: linear-gradient(90deg,#111,transparent,#111),url("assets/images/headlights.jpg");
+    background: linear-gradient(90deg,#111,transparent,#111),url("assets/images/media/headlights.jpg");
     background-position: center;
     background-size: cover;
 }
@@ -292,4 +292,87 @@ body::-webkit-scrollbar-corner{
     height: 60vh;
     width: 100%;
     background: var(--primary-back);
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+}
+.highlights-top{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.highlights-title{
+    font-family: audi,sans-serif;
+    font-weight: 600;
+    font-size: 42px;
+    flex-grow: 0;
+}
+.highlights-mid{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    --bor: 5px;
+    gap: var(--bor);
+}
+.highlight-card{
+    height: 300px;
+    width: 400px;
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: background-size 0.5s;
+    outline: var(--bor) solid var(--primary-text);
+    &.card1{
+        background:var(--primary-back) url("assets/images/media/black_back_audi.jpg");
+        background-size: 100%;
+        background-position: center;
+    }
+    &.card2{
+        background:var(--primary-back) url("assets/images/media/red_speed_audi.jpg");
+        background-size: 100%;        
+        background-position: center;  
+    }
+    &.card3{
+        background:var(--primary-back) url("assets/images/media/gray_front_audi.jpg");
+        background-size: 100%;        
+        background-position: center;  
+    }
+}
+.highlight-card:hover{
+    background-size: 115%;
+    & > .highlight-card-text{
+        height: calc(1em + 15px);
+    }
+}
+.highlight-card-icon{
+    border-radius: 50%;
+    background: #ddd;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.highlight-card-icon > img{
+    width: 50px;
+}
+.highlight-card-title{
+    font-family: audi,sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+
+}
+.highlight-card-text{
+    font-family: audi,sans-serif;
+    font-size: 36px;
+    overflow: hidden;
+    height: 0px;
+    transition: height 0.5s;
+    & > span{
+        font-size: 22px;
+    }
 }

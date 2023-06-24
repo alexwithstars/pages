@@ -72,7 +72,9 @@ index.forEach(entrie => {
 const list = qsa(".navbar-links-item")
 list.forEach(entrie=>{
     entrie.addEventListener("click",(e)=>{
-        window.location.assign(`./#${e.target.attributes.data.value}`)
+        scroll(0,gti(e.target.attributes.data.value).offsetTop-navbar.clientHeight)
+        // window.location.assign(`./#${e.target.attributes.data.value}`)
+        // gti(e.target.attributes.data.value).scrollIntoView()
     })
 })
 const down = qs(".down-img")
