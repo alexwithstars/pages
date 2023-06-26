@@ -83,15 +83,21 @@
 
 
 /* Themes */
+.both-modes{
+    --general-text: #ddd;
+}
 .dark-mode{
     --primary-back: #000;
+    /* --secondary-back: #0c0900; */
+    --secondary-back: #000;
     --primary-text: #ddd;
     --navbar: #0a0a0a;
 }
 .bright-mode{
-    --primary-back: #ddd;
+    --primary-back: #eee;
+    --secondary-back: #f0ead2;
     --primary-text: #000;
-    --navbar: #eee;
+    --navbar: #fff;
 }
 
 
@@ -103,6 +109,7 @@ body{
     background: var(--primary-back);
     color: var(--primary-text);
     background-attachment: fixed;
+    --nav-he: 75px;
 }
 :root{
     scroll-behavior: smooth;
@@ -130,7 +137,6 @@ body::-webkit-scrollbar-corner{
     width: 100%;
 }
 .navbar{
-    --nav-he: 80px;
     height: var(--nav-he);
     display: flex;
     justify-content: space-between;
@@ -141,10 +147,10 @@ body::-webkit-scrollbar-corner{
 /* Navbar :: on top */
 .navbar-top{
     background: transparent;
-    color: #ddd;
+    color: var(--general-text);
     backdrop-filter: blur(5px);
     & .navbar-logo-text{
-        color: #ddd;
+        color: var(--general-text);
     }
 }
 /* Navbar :: brand */
@@ -238,6 +244,8 @@ body::-webkit-scrollbar-corner{
     width: 40%;
     height: 100%;
 }
+
+/* First glance :: text */
 .first-title{
     padding-left: 50px;
     display: flex;
@@ -251,7 +259,7 @@ body::-webkit-scrollbar-corner{
     border-radius: 15px;
     font-family: audi,sans-serif;
     font-size: 54px;
-    color: #ddd;
+    color: var(--general-text);
     text-shadow: 0 0 5px #000;
     & > span{
         color: #7af;
@@ -259,7 +267,7 @@ body::-webkit-scrollbar-corner{
 }
 .title-text{
     width: 70%;
-    color: #ddd;
+    color: var(--general-text);
     font-size: 18px;
     font-family: audi,sans-serif;
     & > span{
@@ -268,6 +276,8 @@ body::-webkit-scrollbar-corner{
         text-shadow: 0 0 1px;
     }
 }
+
+/* First glance :: down arrow */
 .down-arrow{
     display: flex;
     justify-content: center;
@@ -276,6 +286,7 @@ body::-webkit-scrollbar-corner{
 .down-img{
     filter: drop-shadow(0 0 5px #ddd);
     width: 180px;
+    cursor: pointer;
     animation: upDown 1.5s infinite alternate-reverse ease-in-out;
 }
 @keyframes upDown {
@@ -289,7 +300,7 @@ body::-webkit-scrollbar-corner{
 
 /* Highlights */
 .highlights{
-    height: 60vh;
+    min-height: 60vh;
     width: 100%;
     background: var(--primary-back);
     padding: 50px;
@@ -298,17 +309,21 @@ body::-webkit-scrollbar-corner{
     flex-direction: column;
     gap: 50px;
 }
+
+/* Highlights :: Title */
 .highlights-top{
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 .highlights-title{
-    font-family: audi,sans-serif;
+    font-family: raleway,sans-serif;
     font-weight: 600;
     font-size: 42px;
-    flex-grow: 0;
+    letter-spacing: 3px;
 }
+
+/* Highlights :: cards */
 .highlights-mid{
     width: 100%;
     display: flex;
@@ -316,29 +331,32 @@ body::-webkit-scrollbar-corner{
     justify-content: center;
     --bor: 5px;
     gap: var(--bor);
+    color: var(--general-text);
 }
 .highlight-card{
-    height: 300px;
-    width: 400px;
+    height: 280px;
+    width: 350px;
     display: flex;
     gap: 15px;
+    cursor: default;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    user-select: none;
     transition: background-size 0.5s;
     outline: var(--bor) solid var(--primary-text);
     &.card1{
-        background:var(--primary-back) url("assets/images/media/black_back_audi.jpg");
+        background:linear-gradient( #0000,#000c),var(--primary-back) url("assets/images/media/black_back_audi.jpg");
         background-size: 100%;
         background-position: center;
     }
     &.card2{
-        background:var(--primary-back) url("assets/images/media/red_speed_audi.jpg");
+        background:linear-gradient( #0000,#000c),var(--primary-back) url("assets/images/media/red_speed_audi.jpg");
         background-size: 100%;        
         background-position: center;  
     }
     &.card3{
-        background:var(--primary-back) url("assets/images/media/gray_front_audi.jpg");
+        background:linear-gradient( #0000,#000c),var(--primary-back) url("assets/images/media/gray_front_audi.jpg");
         background-size: 100%;        
         background-position: center;  
     }
@@ -375,4 +393,134 @@ body::-webkit-scrollbar-corner{
     & > span{
         font-size: 22px;
     }
+}
+
+/* Design */
+.design{
+    display: flex;
+    aspect-ratio: 16/9;
+    height: calc(100vh - var(--nav-he));
+    --vpad: 60px;
+    --hpad: 45px;
+    padding: var(--vpad) var(--hpad);
+    position: relative;
+    background: var(--secondary-back);
+    & > section{
+        position: absolute;
+        height: calc(100% - var(--vpad) * 2);
+        width: calc(100% - var(--hpad) * 2);
+    }
+}
+
+/* Design :: imgs */
+.design-imgs{
+    display: flex; 
+    overflow: scroll hidden;
+    background: #000;
+    scroll-snap-type: x mandatory;
+    box-shadow: 0 0 35px 10px #3a2b0080;
+    &::-webkit-scrollbar{
+        height: 5px;
+    }
+    &::-webkit-scrollbar-thumb{
+        background: #f00;
+    }
+    &::-webkit-scrollbar-track{
+        background:transparent;
+    }
+    & > picture{
+        min-width: 100%;
+        scroll-snap-align: center;
+        & > img{
+            height: 100%;
+            width: 100%;
+            object-position: center;
+            object-fit: cover;
+        }
+    }
+    /* &:hover ~ .design-buttons > .design-button{
+        opacity: 1;
+    } */
+}
+
+/* Design :: buttons */
+.design-buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    z-index: 10;
+    pointer-events: none;
+
+}
+.design-button{
+    all: unset;
+    width:60px;
+    height:60px;
+    z-index: 10;
+    opacity: 0;
+    background: #fff3;
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: all;
+    backdrop-filter: blur(5px);
+    mask-size: 100%;
+    -webkit-mask-size: 100%;
+    transition: opacity 0.5s,background-color 0.5s;
+    &:hover{
+        opacity: 1;
+        background-color: #fff6;
+    }
+    &#left-arrow{
+        mask-image: url("assets/images/icons/left.svg");
+        -webkit-mask-image: url("assets/images/icons/left.svg");
+    }
+    &#right-arrow{
+        mask-image: url("assets/images/icons/right.svg");
+        -webkit-mask-image: url("assets/images/icons/right.svg");
+    }
+}
+.show{
+    opacity: 1;
+}
+
+/* Design :: title */
+.design-title{
+    position: absolute;
+    top: calc(var(--vpad) + 20px);
+    left: calc(var(--hpad) + 20px);
+    font-size: 42px;
+    font-family: raleway,sans-serif;
+    letter-spacing: 3px;
+    user-select: none;
+}
+
+/* Design :: text */
+.design-text{
+    position: absolute;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    display: flex;
+}
+.individual-text-design{
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(#0000,#000);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 30px;
+    gap: 20px;
+}
+.design-text-title{
+    font-family: raleway;
+    font-size: 54px;
+    width: 50%;
+}
+.design-text-paragraph{
+    font-family: audi;
+    font-size: 18px;
+
 }

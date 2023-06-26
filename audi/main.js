@@ -40,23 +40,24 @@ navbarToggle.observe(ref) // observamos el elemento de referencia para optimizar
 
 // script para crear un efecto parallax 
 const back = qs(".header-back") // fondo parallax
-function parallax(){
-    back.style.transform = `translateY(${document.documentElement.scrollTop/2}px)`
+
+function parallax(){back.style.transform = `translateY(${document.documentElement.scrollTop/2}px)`}
+
+function parallaxEntrie(entrie){
+    if(entrie.isIntersecting){
+        document.addEventListener("scroll",parallax,{passive:true})
+    }
+    else{
+        document.removeEventListener("scroll",parallax)
+    }
 }
-if(document.documentElement.scrollTop<window.innerHeight){
-    parallax()
-}
-const firstParallax = new IntersectionObserver((entries)=>{ // creamos un observador
-    // usamos este observador para solo escuchar los eventos cuando sea necesario
-    entries.forEach((entrie)=>{
-        if(entrie.isIntersecting){
-            document.addEventListener("scroll",parallax)
-        }
-        else{
-            document.removeEventListener("scroll",parallax)
-        }
-    })
-})
+
+function parallaxObserver(entries){entries.forEach(parallaxEntrie)}
+
+if(document.documentElement.scrollTop<window.innerHeight){parallax()}
+
+const firstParallax = new IntersectionObserver(parallaxObserver)
+
 firstParallax.observe(ref)
 
 
@@ -79,5 +80,46 @@ list.forEach(entrie=>{
 })
 const down = qs(".down-img")
 down.addEventListener("click",()=>{
-    window.location.assign("./#highlights")
+    scroll(0,gti("highlights").offsetTop-navbar.clientHeight)
+    // window.location.assign("./#highlights")
 })
+
+// script para cambiar entre imagenes
+const left = gti("left-arrow")
+const right = gti("right-arrow")
+const imgCont = qs(".design-imgs")
+function imgScroll(e){
+    if(e.target == right){
+        imgCont.scroll({
+            left: imgCont.scrollLeft + imgCont.clientWidth,
+            behavior:"smooth"
+        })
+    }
+    else{
+        imgCont.scroll({
+            left: imgCont.scrollLeft - imgCont.clientWidth,
+            behavior:"smooth"
+        })
+    }
+}
+left.addEventListener("click",imgScroll)
+right.addEventListener("click",imgScroll)
+
+// script para mostrar los botones
+const buts = qsa(".design-button")
+let timeout
+function show(entrie){
+    entrie.classList.add("show")
+}
+function realHide(entrie){
+    entrie.classList.remove("show")
+}
+function hide(){
+    buts.forEach(realHide)  
+}
+function buttonHide(){
+    clearTimeout(timeout)
+    buts.forEach(show)
+    timeout = setTimeout(hide,1000)
+}
+imgCont.addEventListener("mousemove",buttonHide)
