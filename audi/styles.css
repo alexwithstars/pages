@@ -404,6 +404,7 @@ body::-webkit-scrollbar-corner{
     --hpad: 45px;
     padding: var(--vpad) var(--hpad);
     position: relative;
+    color: var(--general-text);
     background: var(--secondary-back);
     & > section{
         position: absolute;
