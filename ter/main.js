@@ -15,7 +15,14 @@ const modal=gti("modal")
 const card=gti("card")
 const textres=gti("reset")
 const butres=gti("but-res")
+const butControls=gti("but-controls")
+const modalControls=gti("controls-modal")
+const controls=gti("controls")
+const topen=qs(".open")
+const tclose=qs(".close")
+let copen=false
 let turn=false
+let realturn=false
 let ev
 let response
 let moves=0
@@ -114,6 +121,8 @@ async function setCel(e){
     }
     response=check()
     if(response || moves>=9){
+        butControls.removeEventListener("click",showControls)
+        window.removeEventListener("keydown",showControls)
         if(response){
             line.classList.add(response)
             line.classList.add("active")
@@ -158,32 +167,47 @@ async function reset(){
         cels[i].classList.remove("used")
     }
     await delay(300)
-    for(let i=0;i<cels.length;i++){
-        cels[i].addEventListener("click",setCel)
-        cels[i].textContent=""
-        cels[i].classList.remove("disabled")
-    }
     line.classList.remove(response)
     line.classList.remove("active")
-    turn=false
+    turn=realturn
+    realturn=!realturn
     cur.classList.remove("turn")
     card.classList.remove("show")
+    turn ? cur.classList.add("turn") : cur.classList.remove("turn");
     await delay(500)
     textres.classList.remove("show")
     modal.classList.remove("show")
     await delay(1000)
     textres.classList.remove("preshow")
     modal.classList.remove("preshow")
+    for(let i=0;i<cels.length;i++){
+        cels[i].addEventListener("click",setCel)
+        cels[i].textContent=""
+        cels[i].classList.remove("disabled")
+    }
     window.addEventListener("keydown",setCel)
     cur.classList.remove("hide")
     repl.innerHTML=''
     title.innerHTML=''
+    butControls.addEventListener("click",showControls)
+    window.addEventListener("keydown",showControls)
+    butres.addEventListener("click",prereset)
+    window.addEventListener("keydown",prereset)
     moves=0
 }
 async function prereset(e){
     if(e.type=="click" || e.key=="Enter"){
+        butControls.removeEventListener("click",showControls)
+        window.removeEventListener("keydown",showControls)
+        window.addEventListener("keydown",prereset)
+        butres.addEventListener("click",prereset)
         cur.classList.add("hide")
         if(modal.classList.length<2){
+            window.removeEventListener("keydown",setCel)
+            for(let i=0;i<cels.length;i++){
+                cels[i].classList.add("disabled")
+                cels[i].removeEventListener("click",setCel)
+            }
             textres.classList.add("preshow")
             modal.classList.add("preshow")
             await delay(50)
@@ -195,8 +219,49 @@ async function prereset(e){
 
     }
 }
+async function showControls(e){
+    if(e.type=="click"){
+        if(e.pointerId==-1){
+            return
+        }
+    }
+    else{
+        if(e.code!="KeyC"){
+            return
+        }
+    }
+    butControls.removeEventListener("click",showControls)
+    window.removeEventListener("keydown",showControls)
+    if(copen){
+        window.addEventListener("keydown",setCel)
+        window.addEventListener("keydown",prereset)
+        controls.classList.remove("show")
+        await delay(500)
+        topen.classList.remove("hide-text")
+        tclose.classList.add("hide-text")
+        modalControls.classList.remove("show")
+        await delay(1000)
+        modalControls.classList.remove("preshow")
+    }
+    else{
+        window.removeEventListener("keydown",setCel)
+        window.removeEventListener("keydown",prereset)
+        modalControls.classList.add("preshow")
+        await delay(50)
+        modalControls.classList.add("show")
+        await delay(500)
+        topen.classList.add("hide-text")
+        tclose.classList.remove("hide-text")
+        controls.classList.add("show")
+    }
+    butControls.addEventListener("click",showControls)
+    window.addEventListener("keydown",showControls)
+    copen=!copen
+}
 cur.classList.add("hide")
 reset()
 window.addEventListener("keydown",prereset)
+window.addEventListener("keydown",showControls)
 butres.addEventListener("click",prereset)
+butControls.addEventListener("click",showControls)
 again.addEventListener("click",reset)

@@ -8,8 +8,9 @@
 </head>
 <body>
     <button class="but-res" id="but-res">De nuevo</button>
+    <button class="but-controls" id="but-controls"><span class="open">Controles</span><span class="close hide-text">Atras</span></button>
     <div class="current-cont">
-        <div class="current-card" id="current-card">
+        <div class="current-card" id="current-card"> 
             <div class="current-front">x</div>
             <div class="current-back">o</div>
         </div>
@@ -17,49 +18,120 @@
     <div class="tab">
         <div id="line" class="line"></div>
         <div class="row">
-            <div class="celd">
+            <div class="celd"> 
                 <div class="celdtext"></div>
             </div>
-            <div class="celd">
+            <div class="celd"> 
                 <div class="celdtext"></div>
             </div>
-            <div class="celd">
-                <div class="celdtext"></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="celd">
-                <div class="celdtext"></div>
-            </div>
-            <div class="celd">
-                <div class="celdtext"></div>
-            </div>
-            <div class="celd">
+            <div class="celd"> 
                 <div class="celdtext"></div>
             </div>
         </div>
         <div class="row">
-            <div class="celd">
+            <div class="celd"> 
                 <div class="celdtext"></div>
             </div>
-            <div class="celd">
+            <div class="celd"> 
                 <div class="celdtext"></div>
             </div>
-            <div class="celd">
+            <div class="celd"> 
+                <div class="celdtext"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="celd"> 
+                <div class="celdtext"></div>
+            </div>
+            <div class="celd"> 
+                <div class="celdtext"></div>
+            </div>
+            <div class="celd"> 
                 <div class="celdtext"></div>
             </div>       
         </div>
     </div>
     <modal class="modal" id="modal">
-        <article id="card" class="card">
+        <article id="card" class="card"> 
             <section class="card-top">
                 <h2 class="winner" id="winner"></h2>
             </section>
-            <section class="card-mid">
+            <section class="card-mid"> 
                 <div class="replay" id="replay"></div>
             </section>
             <section class="card-bottom">
                 <button class="again" id="again">De nuevo</button>
+            </section>
+        </article>
+    </modal>
+    <modal class="modal" id="controls-modal">
+        <article class="controls" id="controls">
+            <section class="controls-left">
+                <h2 class="section-title">Controles</h2>
+                <div class="control">
+                    <div class="control-title">Reiniciar</div>
+                    <div class="control-key">Enter</div>
+                </div>
+                <div class="control">
+                    <div class="control-title">Controles</div>
+                    <div class="control-key">C</div>
+                </div>
+                <div class="control">
+                    <div class="control-title">Arriba - Izquierda</div>
+                    <div class="control-key">Numpad 7</div>
+                </div>
+                <div class="control">
+                    <div class="control-title">Arriba - Centro</div>
+                    <div class="control-key">Numpad 8</div>
+                </div>
+                <div class="control">
+                    <div class="control-title">Arriba - Derecha</div>
+                    <div class="control-key">Numpad 9</div>
+                </div>
+                <div class="control">
+                    <div class="control-title">Centro - Izquierda</div>
+                    <div class="control-key">Numpad 4</div>
+                </div>
+                <div class="control">
+                    <div class="control-title">Centro</div>
+                    <div class="control-key">Numpad 5</div>
+                </div>
+                <div class="control">
+                    <div class="control-title">Centro - Derecha</div>
+                    <div class="control-key">Numpad 6</div>
+                </div>
+                <div class="control">
+                    <div class="control-title">Abajo - Izquierda</div>
+                    <div class="control-key">Numpad 1</div>
+                </div>
+                <div class="control">
+                    <div class="control-title">Abajo - Centro</div>
+                    <div class="control-key">Numpad 2</div>
+                </div>
+                <div class="control">
+                    <div class="control-title">Abajo - Derecha</div>
+                    <div class="control-key">Numpad 3</div>
+                </div>
+            </section>
+            <section class="controls-right">
+                <h2 class="section-title">Grafica</h2>
+                <div class="represent">
+                    <div class="represent-row">
+                        <div class="represent-celd">Numpad 7</div>
+                        <div class="represent-celd">Numpad 8</div>
+                        <div class="represent-celd">Numpad 9</div>
+                    </div>
+                    <div class="represent-row">
+                        <div class="represent-celd">Numpad 4</div>
+                        <div class="represent-celd">Numpad 5</div>
+                        <div class="represent-celd">Numpad 6</div>
+                    </div>
+                    <div class="represent-row">
+                        <div class="represent-celd">Numpad 1</div>
+                        <div class="represent-celd">Numpad 2</div>
+                        <div class="represent-celd">Numpad 3</div>
+                    </div>
+                </div>
             </section>
         </article>
     </modal>

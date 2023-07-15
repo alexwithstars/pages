@@ -14,6 +14,7 @@ body{
   width:100%;
   height:100vh;
   background: var(--back);
+  overflow: hidden;
 }
 .tab{
   /* width: clamp(0px,80vh,80vw); */
@@ -176,7 +177,7 @@ body{
   transition: opacity 1s;
   justify-content: center;
   align-items: center;
-  z-index: 10;
+  z-index: 200;
 }
 .modal.preshow{
   display: flex;
@@ -282,7 +283,7 @@ body{
   transform: scale(0);
   text-shadow: 0 0 10px;
   transition: transform 0.3s;
-  z-index: 20;
+  z-index: 250;
 }
 .reset.preshow{
   display: block;
@@ -291,12 +292,12 @@ body{
   transition: transform 0.3s cubic-bezier(.31,.96,.35,1.51);
   transform: none;
 }
-.but-res{
+.but-res,.but-controls{
   all: unset;
   position: absolute;
   top: 20px;
   right: 20px;
-  z-index: 200;
+  z-index: 50;
   width: 200px;
   height: 50px;
   opacity: 0.5;
@@ -312,10 +313,104 @@ body{
   cursor: pointer;
   transition: box-shadow 0.5s, color  0.5s,opacity 0.5s;
   box-shadow: 5px 5px #ca8;
-  z-index: 5;
   &:hover{
     opacity: 1;
     box-shadow: 0 0 20px #fa8;
     color: #643;
   }
+}
+#controls-modal{
+  align-items: start;
+  padding: 50px;
+  z-index: 100;
+  overflow-y: auto;
+}
+.controls{
+  display: flex;
+  width: 70vw;
+  background: #4441;
+  border-radius: 30px;
+  padding: 30px 50px 50px;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  color: #ccc;
+  transform: translateY(100vh);
+  transition: transform 0.5s;
+  & > section{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+  }
+}
+.section-title{
+  font-family: cursive;
+  text-shadow: 0 0 3px;
+  padding: 5px;
+  border-bottom: 2px solid #ccc;
+  margin-bottom: 20px;
+}
+.control{
+  display: flex;
+  flex-direction: column;
+  width: 170px;
+  gap: 10px;
+}
+.control-title{
+  font-family: sans-serif;
+  font-weight: 600;
+}
+.control-key{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: end;
+  padding: 10px;
+  border-radius: 10px;
+  width: 120px;
+  font-family: monospace;
+  font-size: 16px;
+  letter-spacing: 1px;
+  border: 2px solid #ccc;
+}
+.represent{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 1/1;
+  gap: 5px;
+  background: #ccc;
+  outline:2px solid #aaa;
+  outline-offset: 10px;
+}
+.represent-row{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 5px;
+}
+.represent-celd{
+  width:100%;
+  height:100%;
+  display: flex;
+  font-family: monospace;
+  font-size: 16px;
+  justify-content: center;
+  align-items: center;
+  background: #112;
+}
+.but-controls{
+  left:20px;
+  z-index: 150;
+  & > span{
+    position: absolute;
+    transition: opacity 0.3s;
+  }
+}
+.hide-text{
+  opacity: 0;
+}
+.controls.show{
+  transform: none;
 }
