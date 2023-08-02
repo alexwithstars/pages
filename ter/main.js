@@ -233,6 +233,10 @@ async function showControls(e){
     butControls.removeEventListener("click",showControls)
     window.removeEventListener("keydown",showControls)
     if(copen){
+        if(modalControls.scrollTop>0){
+            modalControls.scroll(0,0);
+            await delay(500);
+        }
         window.addEventListener("keydown",setCel)
         window.addEventListener("keydown",prereset)
         controls.classList.remove("show")

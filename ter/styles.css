@@ -322,6 +322,7 @@ body{
 #controls-modal{
   align-items: start;
   padding: 50px;
+  scroll-behavior: smooth;
   z-index: 100;
   overflow-y: auto;
 }

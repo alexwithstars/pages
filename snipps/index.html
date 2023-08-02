@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Generador de snippets</title>
+</head>
+<body>
+    <section class="tabs-section">
+        <label for="tabs" class="tabs-labeñ">Tamaño de tabulacion</label>
+        <div class="tabs-bottom">
+            <label for="tabs">2</label>
+            <button class="tabs" id="tabs"><div class="slider" id="slider"></div></button>
+            <label for="tabs">4</label>
+        </div>
+    </section>
+    <main>
+        <article class="heads">
+            <section class="logo-section">
+                <img src="assets/images/logo.png" alt="logo" id="logo" class="logo">
+            </section>
+        <section class="heads-section">
+            <input type="text" id="name" class="name inp" placeholder="Nombre" autocomplete="off">
+            <input type="text" id="prefix" class="prefix inp" placeholder="Prefijo" autocomplete="off">
+        </section>
+        <section class="description-section">
+            <h1>Generador de snippets para<br>Visual Studio Code.<br><span>by: Alexwithstars</span></h1>
+            <input type="text" id="description" class="description inp" placeholder="Descripcion" autocomplete="off">
+        </section>
+    </article>
+    <article class="codes">
+        <textarea id="code" class="code inp" placeholder="Codigo" autocomplete="off" spellcheck="false"></textarea>
+        <input type="text" id="hide" class="inp">
+        <div class="result-snippet">
+            <div class="result-snippet-code" id="result"></div>
+            <button id="clipboard" class="clipboard"><img src="assets/images/clip.svg" alt="clipboard"><span>Copiar</span></button>
+        </div>
+    </article>
+    </main>
+    <script src="main.js" type="text/javascript"></script>
+</body>
+</html>
