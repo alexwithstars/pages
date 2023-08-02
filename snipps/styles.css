@@ -12,6 +12,7 @@ body{
     width:100%;
     height: 100vh;
     display: flex;
+    overflow: hidden;
     flex-direction: column;
     align-items: center;
     padding: 50px;
@@ -33,13 +34,14 @@ main{
 .tabs-section{
     position: fixed;
     top: 10px;
-    right: 20px;
+    right: 35px;
     padding: 10px;
     display: flex;
     z-index: 200;
     flex-direction: column;
     gap: 5px;
     background: #1e1f22;
+    box-shadow: 0 0 15px #141416;
     border-radius: 15px;
     & > .tabs-bottom{
         display: flex;
@@ -184,7 +186,7 @@ main{
             background: #141416;
             padding: 8px 20px;
             border-radius: 15px;
-            transition: transform 0.5s;
+            transition: transform 0.5s,box-shadow 0.5s;
             overflow: hidden;
             &::after{
                 content: '';
@@ -197,15 +199,16 @@ main{
 
             }
             &:hover{
-                transform: scale(1.1);
+                transform: scale(1.09);
+                box-shadow: 0 0 15px #50509c;
                 &::after{
-                    box-shadow:inset 0 -45px rgb(101, 101, 199);
+                    box-shadow:inset 0 -45px #6565c7;
                 }
             }
             &:active{
                 transform: scale(0.9);
                 &::after{
-                    box-shadow: inset 0 -45px rgb(80, 80, 155);
+                    box-shadow: inset 0 -45px #50509b;
                 }
             }
         }
