@@ -21,6 +21,7 @@ const toSnippet=/^.*$/gm
 let tabulations=2
 let tabs
 let resultSnippet
+let resultUserSnippet
 updateTabs()
 function updateTabs(){
     if(tabulations==2){
@@ -44,10 +45,11 @@ function snippet(e={target:"",key:""}){
     let resultCode=code.value
     resultCode=resultCode.replace(specialCharacters,match=>`\\${match}`)
     resultCode=resultCode.replace(tabs,'\\t')
-    resultCode=resultCode.replace(htmll,'&lt')
-    resultCode=resultCode.replace(htmlg,'&gt')
     resultCode=resultCode.replace(toSnippet,match=>`\t\t"${match}",`)
     resultCode=resultCode.slice(0,-1)
+    resultUserSnippet=`"${sname.value}":{\n\t"prefix":"${prefix.value}",\n\t"body":[\n${resultCode}\n\t],\n\t"description":"${description.value}"\n}`
+    resultCode=resultCode.replace(htmll,'&lt')
+    resultCode=resultCode.replace(htmlg,'&gt')
     resultSnippet=`"${sname.value}":{\n\t"prefix":"${prefix.value}",\n\t"body":[\n${resultCode}\n\t],\n\t"description":"${description.value}"\n}`
     result.innerHTML=`<pre>${resultSnippet}\n\n\n\n</pre>`
 }
@@ -65,7 +67,7 @@ function delay(time){
     })
 }
 async function copy(){
-    await navigator.clipboard.writeText(resultSnippet).catch(ex)
+    await navigator.clipboard.writeText(resultUserSnippet).catch(ex)
     if(fail){
         fail=false;
         return
