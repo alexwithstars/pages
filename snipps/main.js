@@ -18,7 +18,7 @@ const specialCharacters=/["'\\]/g
 const htmlg=/>/g
 const htmll=/</g
 const toSnippet=/^.*$/gm
-let tabulations=4
+let tabulations=2
 let tabs
 let resultSnippet
 updateTabs()
