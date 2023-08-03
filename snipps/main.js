@@ -56,7 +56,7 @@ function snippet(e={target:"",key:""}){
 let fail=false;
 function ex(e){
     fail=true
-    console.log(e)
+    console.warn(e)
     alert(`No se pudo copiar al portapapeles: ver consola para mas info`);
 }
 function delay(time){
