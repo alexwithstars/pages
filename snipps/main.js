@@ -18,11 +18,23 @@ const specialCharacters=/["'\\]/g
 const htmlg=/>/g
 const htmll=/</g
 const toSnippet=/^.*$/gm
-let tabulations=2
+localStorage.getItem("tabs") ?? localStorage.setItem("tabs",4)
+let tabulations=localStorage.getItem("tabs");
 let tabs
 let resultSnippet
 let resultUserSnippet
-updateTabs()
+
+// first update tabs
+if(tabulations==2){
+    slider.classList.remove("slide")
+}
+else{
+    slider.classList.add("slide")
+}
+tabs=new RegExp(`\t| {${tabulations}}`,"g")
+document.body.style.tabSize=tabulations
+snippet()
+
 function updateTabs(){
     if(tabulations==2){
         tabulations=4
@@ -32,7 +44,7 @@ function updateTabs(){
         tabulations=2
         slider.classList.remove("slide")
     }
-
+    localStorage.setItem("tabs",tabulations)
     tabs=new RegExp(`\t| {${tabulations}}`,"g")
     document.body.style.tabSize=tabulations
     snippet()
