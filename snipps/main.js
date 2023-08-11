@@ -180,6 +180,8 @@ async function getFile(e){
     let codeFile = await new Promise((resolve,reject)=>{
         modalText.classList.add("hide")
         charge.classList.remove("hide")
+        percent.textContent = `0%`
+        load.style.width= `0%`
         reader.addEventListener("progress",(e)=>{
             let prog = Math.floor(e.loaded/e.total*100)
             percent.textContent = `${prog}%`
