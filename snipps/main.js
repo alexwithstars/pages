@@ -9,11 +9,16 @@ const prefix=gti("prefix")
 const description=gti("description")
 const code=gti("code")
 const result=gti("result")
-const point=gti("hide")
 const objectListeners=qsa(".inp")
 const clip=gti("clipboard")
 const slider=gti("slider")
 const tabsButton=gti("tabs")
+const dropModal = gti("dropModal")
+const dropzone = gti("dropzone")
+const load = gti("load")
+const modalText = gti("modalText")
+const percent = gti("percent")
+const charge = gti("charge")
 const specialCharacters=/["'\\]/g
 const htmlg=/>/g
 const htmll=/</g
@@ -33,6 +38,16 @@ else{
 }
 tabs=new RegExp(`\t| {${tabulations}}`,"g")
 document.body.style.tabSize=tabulations
+
+let sessionData = sessionStorage.getItem("sessionData") ?? null
+if(sessionData){
+    sessionData=JSON.parse(sessionData)
+    sname.value=sessionData.sname
+    prefix.value=sessionData.prefix
+    description.value=sessionData.description
+    code.value=sessionData.code
+}
+
 snippet()
 
 function updateTabs(){
@@ -49,11 +64,26 @@ function updateTabs(){
     document.body.style.tabSize=tabulations
     snippet()
 }
-function snippet(e={target:"",key:""}){
-    if(e.key=="Tab" && e.target==point){
-        code.focus()
-        code.value+="\t"
+
+function tabfix(e){
+    if(e.key=="Tab"){
+        e.preventDefault()
+        let string = e.target.value
+        let start = e.target.selectionStart
+        let end = e.target.selectionEnd
+        e.target.value  = string.substring(0,start)+'\t'+string.substring(start)
+        e.target.selectionStart=start+1
+        e.target.selectionEnd=end+1
     }
+}
+function snippet(){
+    sessionData={
+        sname:sname.value,
+        prefix:prefix.value,
+        description:description.value,
+        code:code.value
+    }
+    sessionStorage.setItem("sessionData",JSON.stringify(sessionData))
     let resultCode=code.value
     resultCode=resultCode.replace(specialCharacters,match=>`\\${match}`)
     resultCode=resultCode.replace(tabs,'\\t')
@@ -96,5 +126,73 @@ async function copy(){
     document.body.removeChild(noti)
 }
 objectListeners.forEach(entrie=>entrie.addEventListener("keyup",snippet))
+code.addEventListener("keydown",tabfix)
 clip.addEventListener("click",copy)
 tabsButton.addEventListener("click",updateTabs)
+addEventListener("dragenter",(e)=>{
+    dropModal.classList.remove("hide")
+})
+dropzone.addEventListener("dragover",(e)=>{
+    e.preventDefault()
+})
+dropzone.addEventListener("dragleave",(e)=>{
+    dropModal.classList.add("hide")
+})
+let textTest=/text/
+let extensions = [".cpp$",".h$",".txt$",
+".c$",".py$",".ts$",".cs$",".html$",
+".css$",".js$",".xml$",".json$"]
+async function getFile(e){
+    e.preventDefault()
+    try{
+        todo:do{
+            let type = e.dataTransfer.files[0].type
+            if(textTest.test(type) ){
+                break todo
+            }
+            let name = e.dataTransfer.files[0].name
+            for(let i of extensions){
+                if(RegExp(i).test(name)){
+                    break todo
+                }
+            }
+            if(type!=""){
+                alert(`tipo archivo no soportado: ${type}`)
+                dropModal.classList.add("hide")
+                return
+            }
+            if(confirm("tipo de archivo desconocido, continuar?")){
+                break todo
+            }
+            else{
+                dropModal.classList.add("hide")
+                return
+            }
+        }while(false)
+    }catch(err){
+        alert("algo salio mal con la transferencia de archivos: ver consola")
+        console.warn(err)
+        dropModal.classList.add("hide")
+        return
+    }
+    let reader = new FileReader
+    reader.readAsText(e.dataTransfer.files[0])
+    let codeFile = await new Promise((resolve,reject)=>{
+        modalText.classList.add("hide")
+        charge.classList.remove("hide")
+        reader.addEventListener("progress",(e)=>{
+            let prog = Math.floor(e.loaded/e.total*100)
+            percent.textContent = `${prog}%`
+            load.style.width= `${prog}%`
+        })
+        reader.addEventListener("load",(e)=>{
+            dropModal.classList.add("hide")
+            modalText.classList.remove("hide")
+            charge.classList.add("hide")
+            resolve(e.target.result)
+        })
+    })
+    code.value=codeFile
+    snippet()
+}
+dropzone.addEventListener("drop",getFile)

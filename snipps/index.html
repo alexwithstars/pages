@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="icon" href="assets/images/logo.png">
     <title>Generador de snippets</title>
 </head>
 <body>
@@ -18,7 +19,7 @@
     <main>
         <article class="heads">
             <section class="logo-section">
-                <img src="assets/images/logo.png" alt="logo" id="logo" class="logo">
+                <img src="assets/images/logo.png" alt="logo" id="logo" class="logo" draggable="false">
             </section>
         <section class="heads-section">
             <input type="text" id="name" class="name inp" placeholder="Nombre" autocomplete="off">
@@ -30,14 +31,33 @@
         </section>
     </article>
     <article class="codes">
-        <textarea id="code" class="code inp" placeholder="Codigo" autocomplete="off" spellcheck="false"></textarea>
-        <input type="text" id="hide" class="inp">
+        <textarea id="code" class="code inp" placeholder="Escribe, pega, o arrastra tu codigo a la pagina" autocomplete="off" spellcheck="false"></textarea>
         <div class="result-snippet">
             <div class="result-snippet-code" id="result"></div>
             <button id="clipboard" class="clipboard"><img src="assets/images/clip.svg" alt="clipboard"><span>Copiar</span></button>
         </div>
     </article>
     </main>
+    <modal class="drop-modal hide" id="dropModal">
+        <span id="modalText">¡Suelta tu archivo aqui!</span>
+        <div class="charge hide" id="charge">
+            <div class="load" id="load"></div>
+            <span id="percent" class="percent">0%</span>
+        </div>
+        <svg id="corner-tl" viewBox="0 0 28 28" width="50px" stroke-linejoin="round" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25,2 L2,2 L2,25" fill="none" stroke="#fff" stroke-width="3" />
+        </svg>
+        <svg id="corner-bl" viewBox="0 0 28 28" width="50px" stroke-linejoin="round" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25,2 L2,2 L2,25" fill="none" stroke="#fff" stroke-width="3" />
+        </svg>
+        <svg id="corner-br" viewBox="0 0 28 28" width="50px" stroke-linejoin="round" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25,2 L2,2 L2,25" fill="none" stroke="#fff" stroke-width="3" />
+        </svg>
+        <svg id="corner-tr" viewBox="0 0 28 28" width="50px" stroke-linejoin="round" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25,2 L2,2 L2,25" fill="none" stroke="#fff" stroke-width="3" />
+        </svg>
+        <div class="dropzone" id="dropzone"></div>
+    </modal>
     <script src="main.js" type="text/javascript"></script>
 </body>
 </html>
