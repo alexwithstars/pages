@@ -510,8 +510,9 @@ body::-webkit-scrollbar-corner{
     background: linear-gradient(#0000,#000);
     flex-shrink: 0;
     display: flex;
-    flex-direction: column;
-    justify-content: end;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    align-items: end;
     padding: 30px;
     gap: 20px;
 }
@@ -521,7 +522,9 @@ body::-webkit-scrollbar-corner{
     width: 50%;
 }
 .design-text-paragraph{
+    text-align: end;
     font-family: audi;
     font-size: 18px;
-
+    line-height: 1.2;
+    width: 40%;
 }

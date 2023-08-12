@@ -120,6 +120,6 @@ function hide(){
 function buttonHide(){
     clearTimeout(timeout)
     buts.forEach(show)
-    timeout = setTimeout(hide,1000)
+    timeout = setTimeout(hide,800)
 }
 imgCont.addEventListener("mousemove",buttonHide)
