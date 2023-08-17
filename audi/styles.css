@@ -411,6 +411,14 @@ body::-webkit-scrollbar-corner{
         height: calc(100% - var(--vpad) * 2);
         width: calc(100% - var(--hpad) * 2);
     }
+    & > .progress-bar{
+        position: absolute;
+        bottom: var(--vpad);
+        left: var(--hpad);
+        height: 5px;
+        background: #f00;
+        z-index: 10;
+    }
 }
 
 /* Design :: imgs */
@@ -421,14 +429,15 @@ body::-webkit-scrollbar-corner{
     scroll-snap-type: x mandatory;
     box-shadow: 0 0 35px 10px #3a2b0080;
     &::-webkit-scrollbar{
-        height: 5px;
+        /* height: 5px; */
+        display: none;
     }
-    &::-webkit-scrollbar-thumb{
+    /* &::-webkit-scrollbar-thumb{
         background: #f00;
     }
     &::-webkit-scrollbar-track{
         background:transparent;
-    }
+    } */
     & > picture{
         min-width: 100%;
         scroll-snap-align: center;
@@ -468,7 +477,7 @@ body::-webkit-scrollbar-corner{
     mask-size: 100%;
     -webkit-mask-size: 100%;
     transition: opacity 0.5s,background-color 0.5s;
-    &:hover{
+    &:not(.hide):hover{
         opacity: 1;
         background-color: #fff6;
     }

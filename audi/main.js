@@ -109,7 +109,9 @@ right.addEventListener("click",imgScroll)
 const buts = qsa(".design-button")
 let timeout
 function show(entrie){
-    entrie.classList.add("show")
+    if(!entrie.classList.contains("hide")){
+        entrie.classList.add("show")
+    }
 }
 function realHide(entrie){
     entrie.classList.remove("show")
@@ -123,3 +125,24 @@ function buttonHide(){
     timeout = setTimeout(hide,800)
 }
 imgCont.addEventListener("mousemove",buttonHide)
+
+const progressBar = gti("progressBar")
+const imgConts = qsa(".design-imgs > picture").length
+function updateScroll(){
+    let fullSize = imgCont.clientWidth*(imgConts-1)
+    if(imgCont.scrollLeft<=0){
+        left.classList.add("hide")
+    }
+    else{
+        left.classList.remove("hide")
+    }
+    if(imgCont.scrollLeft>=fullSize){
+        right.classList.add("hide")
+    }
+    else{
+        right.classList.remove("hide")
+    }
+    progressBar.style.width = `${imgCont.clientWidth/imgConts*(imgCont.scrollLeft/imgCont.clientWidth+1)}px`;
+}
+updateScroll()
+imgCont.addEventListener("scroll",updateScroll)
