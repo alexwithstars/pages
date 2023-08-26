@@ -44,21 +44,18 @@
 
 /* Load screen :: animations */
 .text-loading::after{
-    animation: loading 2s linear infinite;
+    animation: loading 0.5s 1 linear forwards;
 }
 @keyframes loading {
-    0%{
+    from{
         transform: translate(-150%);
     }
-    25%{
-        transform: translate(150%);
-    }
-    100%{
+    to{
         transform: translate(150%);
     }
 }
 .fadeout{
-    animation: loadingFadeout 1s forwards;
+    animation: loadingFadeout 0.2s ease-in forwards;
 }
 @keyframes loadingFadeout {
     to{
@@ -69,22 +66,34 @@
     display:none;
 }
 
+
 /* Fonts */
 @font-face {
-    font-family: Raleway;
-    src: url("assets/fonts/Raleway-VariableFont_wght.ttf");
+    font-family: 'Raleway';
+    src: url('assets/fonts/Raleway_font.ttf') format('ttf'),
+    url('assets/fonts/Raleway_font.woff2') format('woff2'),
+    url('assets/fonts/Raleway_font.woff') format('woff')
+    ;
     font-display: swap;
+    font-weight: normal;
+    font-style: normal;
 }
 @font-face {
-    font-family: Audi;
-    src: url("assets/fonts/AudiType-Normal_03.ttf");
+    font-family: 'Audi';
+    src: url('assets/fonts/Audi_font.woff2') format('woff2'),
+    url('assets/fonts/Audi_font.woff') format('woff'),
+    url('assets/fonts/Audi_font.ttf') format('ttf')
+    ;
     font-display: swap;
+    font-weight: normal;
+    font-style: normal;
 }
 
 
 /* Themes */
 .both-modes{
     --general-text: #ddd;
+    --general-back: #000;
 }
 .dark-mode{
     --primary-back: #000;
@@ -110,6 +119,7 @@ body{
     color: var(--primary-text);
     background-attachment: fixed;
     --nav-he: 75px;
+    scrollbar-gutter: stable;
 }
 :root{
     scroll-behavior: smooth;
@@ -227,7 +237,7 @@ body::-webkit-scrollbar-corner{
     z-index: -1;
     height: 100vh;
     width: 100%;
-    background: linear-gradient(90deg,#111,transparent,#111),url("assets/images/media/headlights.jpg");
+    background-color: var(--general-back);
     background-position: center;
     background-size: cover;
 }
@@ -252,10 +262,8 @@ body::-webkit-scrollbar-corner{
     flex-direction: column;
     justify-content: center;
     gap: 40px;
-    
 }
 .title{
-    backdrop-filter: blur(2px);
     border-radius: 15px;
     font-family: audi,sans-serif;
     font-size: 54px;
@@ -346,17 +354,17 @@ body::-webkit-scrollbar-corner{
     transition: background-size 0.5s;
     outline: var(--bor) solid var(--primary-text);
     &.card1{
-        background:linear-gradient( #0000,#000c),var(--primary-back) url("assets/images/media/black_back_audi.jpg");
+        background:linear-gradient( #0000,#000c),var(--primary-back) url("assets/images/media/highlights/black_back_audi.webp");
         background-size: 100%;
         background-position: center;
     }
     &.card2{
-        background:linear-gradient( #0000,#000c),var(--primary-back) url("assets/images/media/red_speed_audi.jpg");
+        background:linear-gradient( #0000,#000c),var(--primary-back) url("assets/images/media/highlights/red_speed_audi.webp");
         background-size: 100%;        
         background-position: center;  
     }
     &.card3{
-        background:linear-gradient( #0000,#000c),var(--primary-back) url("assets/images/media/gray_front_audi.jpg");
+        background:linear-gradient( #0000,#000c),var(--primary-back) url("assets/images/media/highlights/gray_front_audi.webp");
         background-size: 100%;        
         background-position: center;  
     }
@@ -503,6 +511,7 @@ body::-webkit-scrollbar-corner{
     font-family: raleway,sans-serif;
     letter-spacing: 3px;
     user-select: none;
+    text-shadow: 0 0 5px;
 }
 
 /* Design :: text */

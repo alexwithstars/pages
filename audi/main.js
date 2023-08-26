@@ -4,15 +4,35 @@ const qsa = sel => document.querySelectorAll(sel)
 const gti = sel => document.getElementById(sel)
 const gtg = sel => document.getElementsByTagName(sel)
 
+async function registerServiceWorker(){
+    await navigator.serviceWorker.register("serviceWorker.js")
+}
+registerServiceWorker()
+
+const back = qs(".header-back") // primer fondo
+
 // script para retirar la pantalla de carga
-window.addEventListener("load",()=>{
+async function removeLoad(){
+    await new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            resolve()
+        },1000)
+        let img = new Image()
+        img.src='assets/images/media/background/headlights.webp'
+        img.addEventListener("load",()=>{
+            back.style.backgroundImage=`linear-gradient(90deg,#111,transparent,#111), url(${img.src})`
+            resolve()
+        })
+    })
     let loadScreen = qs(".load-screen")
     loadScreen.classList.add("fadeout")
     setTimeout(()=>{
         loadScreen.classList.replace("fadeout","done")
         document.querySelector(".text-loading").classList.remove("text-loading")
-    },1500)
-})
+    },1000)
+}
+removeLoad()
+
 
 // script para obtener el tema de la pagina
 const color = window.matchMedia('(prefers-color-scheme:dark)')
@@ -39,7 +59,6 @@ const navbarToggle = new IntersectionObserver((entries)=>{ // creamos un observa
 navbarToggle.observe(ref) // observamos el elemento de referencia para optimizar
 
 // script para crear un efecto parallax 
-const back = qs(".header-back") // fondo parallax
 
 function parallax(){back.style.transform = `translateY(${document.documentElement.scrollTop/2}px)`}
 
@@ -142,7 +161,7 @@ function updateScroll(){
     else{
         right.classList.remove("hide")
     }
-    progressBar.style.width = `${imgCont.clientWidth/imgConts*(imgCont.scrollLeft/imgCont.clientWidth+1)}px`;
+    progressBar.style.width = `${imgCont.clientWidth/imgConts*(imgCont.scrollLeft/imgCont.clientWidth+1)}px`
 }
 updateScroll()
 imgCont.addEventListener("scroll",updateScroll)
