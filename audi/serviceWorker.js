@@ -13,7 +13,7 @@ self.addEventListener("activate",async (e)=>{
         }
         for(let key of keys){
             if(key.startsWith(VERSIONS[i][0])){
-                caches.delete(key)
+                await caches.delete(key)
                 break
             }
         }
