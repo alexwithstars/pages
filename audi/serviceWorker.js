@@ -6,7 +6,7 @@ const VERSIONS={
     resouce:"r-1.0.0"  //resources
 }
 self.addEventListener("activate",async (e)=>{
-    let keys =await caches.keys()
+    let keys =await caches.keys() // Limpieza de cache
     for(let i in VERSIONS){
         if(keys.includes(VERSIONS[i])){
             continue
@@ -23,10 +23,10 @@ self.addEventListener("fetch",(e)=>{
     e.respondWith((async ()=>{
         let cacheRequest=await caches.match(e.request)
         if(cacheRequest){
-            return cacheRequest
+            return cacheRequest // respuesta en cache
         }
         let cache
-        if(VERSIONS[e.request.destination]){
+        if(VERSIONS[e.request.destination]){ // guardamos en cache
             cache = await caches.open(VERSIONS[e.request.destination])
         }
         else{
@@ -34,6 +34,6 @@ self.addEventListener("fetch",(e)=>{
         }
         let newRequest = e.request
         cache.add(newRequest)
-        return fetch(newRequest)
+        return fetch(newRequest) // respuesta en red
     })())
 })

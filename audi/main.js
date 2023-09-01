@@ -4,6 +4,8 @@ const qsa = sel => document.querySelectorAll(sel)
 const gti = sel => document.getElementById(sel)
 const gtg = sel => document.getElementsByTagName(sel)
 
+
+// Registro del service worker
 async function registerServiceWorker(){
     await navigator.serviceWorker.register("serviceWorker.js")
 }
@@ -145,6 +147,8 @@ function buttonHide(){
 }
 imgCont.addEventListener("mousemove",buttonHide)
 
+
+// Barra de progreso para las imagenes
 const progressBar = gti("progressBar")
 const imgConts = qsa(".design-imgs > picture").length
 function updateScroll(){
