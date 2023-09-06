@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="alexwithstars">
+	<meta name="description" content="Generador de texto con un estilo de 'hacker'">
+	<meta name="keywords" content="text,texto,hacker,green,fake,fun">
+	<meta name="theme-color" content="dark">
+	<meta name="color-scheme" content="#040">
+	<meta property="og:title" content="Hackstyle">
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="Generador de texto con un estilo de 'hacker'">
+	<meta property="og:image" content="https://raw.githubusercontent.com/alexwithstars/alexwithstars/main/assets/images/star-logo-rounded.png">
+	<meta property="og:url" content="https://alexwithstars.github.io/pages/audi/">
+	<link rel="icon" href="https://raw.githubusercontent.com/alexwithstars/alexwithstars/main/assets/images/star-logo-rounded.png">
+	<title>Hacking</title>
+</head>
+<body>
+	<script>
+		"use strict";
+		function random(min,max){
+			[min,max]=[parseInt(min),parseInt(max)]
+			if(min>max){[min,max]=[max,min]}
+			max++;
+			return Math.floor(Math.random()*(max-min)+min)
+		}
+
+		const chr = n=>String.fromCodePoint(n)
+		const ord = n=>n.codePointAt(0)
+
+		function delay(time){
+			return new Promise((resolve,reject)=>{
+				setTimeout(()=>{
+					resolve()
+				},time)
+			})
+		}
+
+		async function display(text="Hola mundo"){
+			await delay(1000)
+			console.clear()
+			if(typeof text != "string"){
+				text="Hola mundo"
+			}
+			document.body.innerHTML = ""
+			let styles = `
+				<style>
+					*{
+						padding:0;
+						margin:0;
+						box-sizing:border-box;
+					}
+					body{
+						all:unset;
+						display:flex;
+						justify-content:center;
+						align-items:center;
+						height:100dvh;
+						width:100%;
+						background:radial-gradient(#000 60%,#010);
+					}
+					.x1{
+						width:${text.length+2}ch;
+						font-family:sans-serif;
+						color:#0f0;
+					}
+					.x2{
+						all:unset;
+						height:50px;
+						width:50px;
+						border-radius:5px;
+						position:fixed;
+						right:20px;
+						top:20px;
+						background:#222;
+						opacity:0.5;
+						display:grid;
+						place-items:center;
+						cursor:pointer;
+						&::before,&::after{
+							content:'';
+							position:absolute;
+							height:60%;
+							width:60%;
+							border-radius:50%;
+							background:#000;
+						}
+						&::after{
+							height:40%;
+							width:40%;
+							background:#222;
+						}
+					}
+				</style>
+			`
+			document.body.innerHTML=styles
+			let newText = document.createElement("h1")
+			newText.classList.add("x1")
+			document.body.appendChild(newText)
+			for(let i of text){
+				let nl=30
+				let letters = []
+				let letter=""
+				newText.textContent+=" "
+				if(ord(i)>126 || ord(i)<32){
+					newText.textContent+=i
+					continue
+				}
+				for(let j=0;j<nl;j++){
+					letters.push(random(32,126))
+				}
+				if(!letters.includes(ord(i))){
+					letters.pop()
+					letters.push(ord(i))
+				}
+				nl--
+				while(letter!=i){
+					letter = chr(letters[random(0,nl)])
+					newText.textContent=newText.textContent.slice(0,-1)+letter
+					await delay(0)
+				}
+			}
+			let again = document.createElement("button")
+			again.classList.add("x2")
+			document.body.appendChild(again)
+			again.addEventListener("click",()=>display(prompt("Aqui va el texto que quieras")))
+			console.log("%cdone","color:#0f0")
+		}
+		let text = "Hola mundo"
+		display(text)
+	</script>
+</body>
+</html>
