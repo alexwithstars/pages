@@ -1,0 +1,1 @@
+Base de datos alojada en localStorage, ya que solo es un prototipo

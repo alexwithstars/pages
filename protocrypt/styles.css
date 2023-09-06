@@ -1,0 +1,153 @@
+*{
+	padding:0;
+	margin:0;
+	box-sizing:border-box;
+}
+body{
+	width:100%;
+	height:100dvh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: url("assets/images/back.webp");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.ins{
+	all: unset;
+	height: 50px;
+	width: 200px;
+	background: #0006;
+	border-radius: 100vh;
+	padding: 0 20px;
+	color: #fff;
+	font-family: monospace;
+	font-weight: 600;
+	font-size: 16px;
+}	
+.card{
+	height: 500px;
+	width: 400px;
+	border-radius: 30px;
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	flex-direction: column;
+	backdrop-filter: blur(5px);
+	box-shadow: 2px 2px 5px #fff4,
+	-2px -2px 5px #fff4;
+	background: linear-gradient(#0004,#0000);
+	border: 2px solid #fff4;
+}
+.card-img{
+	height: 120px;
+}
+.pass{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	&>.show{
+		all: unset;
+		position: absolute;
+		right: 20px;
+		height: 20px;
+		width: 20px;
+		cursor: pointer;
+		background: url("assets/images/eye-closed.svg");
+		background-size: cover;
+		&:checked{
+			background: url("assets/images/eye.svg");
+			background-size: cover;
+		}
+	}
+}
+.invalid{
+	animation: shake 0.1s 3;
+	color: #f88;
+	&>*{
+		color: #f88;
+	}
+}
+@keyframes shake {
+	0%{
+		translate: none;
+	}
+	25%{
+		translate: 2%;
+	}
+	75%{
+		translate: -2%;
+	}
+}
+.finish{
+	all:unset;
+	height: 40px;
+	width: 50%;
+	border-radius: 100vh;
+	background: #99f;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #fff;
+	font-size: 16px;
+	font-family: monospace;
+	font-weight: 600;
+	cursor: pointer;
+	user-select: none;
+	transition: letter-spacing 0.3s, transform 0.3s;
+	&:hover{
+		letter-spacing: 3px;
+		transform: scale(1.1);
+	}
+	&:active{
+		letter-spacing: 2px;
+		transform: scale(1);
+	}
+}
+.title{
+	height: 80px;
+	display: flex;
+	font-size: 36px;
+	letter-spacing: 8px;
+	justify-content: center;
+	align-items: center;
+	font-family: verdana;
+	color: #fff;
+}
+.mode{
+	color: #ddd;
+	padding: 3px 10px;
+	background: #a5f;
+	font-family: monospace;
+	border-radius: 100vh;
+	cursor: pointer;
+	display: flex;
+	gap:5px;
+	transition: gap 0.3s;
+	user-select: none;
+	&:hover{
+		gap:15px;
+	}
+}
+.error,.done{
+	font-family: monospace;
+	font-size: 18px;
+	font-weight: 600;
+	padding: 10px;
+	border-radius: 100vh;
+	background: #f22;
+	color: #fff;
+	position: fixed;
+	opacity: 0.8;
+	top: -50px;
+	transition: transform 0.1s ease-in;
+}
+.done{
+	background: #6f6;
+}
+.showin{
+	transition: transform 0.2s ease-out;
+	transform: translateY(100px);
+}
