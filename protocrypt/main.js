@@ -1,5 +1,6 @@
 "use strict";
 import {getDictionary} from "./encrypt.js"
+import { requestUser,getAcount,setAcount } from "./db.js";
 const qs = sel => document.querySelector(sel)
 const qsa = sel => document.querySelectorAll(sel)
 const gti = sel => document.getElementById(sel)
@@ -38,7 +39,7 @@ async function tagInfo(tx,error){
 }
 
 function encryptUser(username,pass){
-	let arr = getDictionary(pass)
+	let arr = getDictionary(username+pass)
 	let usercrypt=""
 	let passcrypt=""
 	for(let i of username){
@@ -83,7 +84,7 @@ mode.addEventListener("click",()=>{
 	})
 })
 
-function bdAction(e){
+async function bdAction(e){
 	if(lr){
 		if(user.value.length<5){
 			tagInfo("Usuario demasiado corto (al menos 5 caracteres)",true)
@@ -94,20 +95,18 @@ function bdAction(e){
 			return
 		}
 	}
-	let acount = encryptUser(user.value,password.value)
+	let encryptedAcount = encryptUser(user.value,password.value)
 	if(lr){
-		if(localStorage.getItem(acount.user)){
+		if(await requestUser(user.value)){
 			tagInfo("Usuario existente",true)
 			return
 		}
-		localStorage.setItem(acount.user,acount.pass)
+		setAcount(user.value,encryptedAcount.user,encryptedAcount.pass)
 		tagInfo("Usuario registrado",false)
 	}
 	else{
-		if(localStorage.getItem(acount.user)){
-			if(acount.pass==localStorage.getItem(acount.user)){
-				tagInfo("acceso correcto",false)
-			}
+		if(encryptedAcount.pass==await getAcount(encryptedAcount.user)){
+			tagInfo("acceso correcto",false)
 		}
 		else{
 			tagInfo("Usuario o contraseña no validos",true)

@@ -1,1 +1,1 @@
-Base de datos alojada en localStorage, ya que solo es un prototipo
+Base de datos alojada en indexedDB, ya que solo es un prototipo
