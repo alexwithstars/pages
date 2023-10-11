@@ -1,11 +1,11 @@
 {
-	"name": "Nombre de tu Aplicación",
-	"short_name": "Nombre Corto",
-	"description": "Descripción de tu Aplicación",
-	"start_url": "/",
+	"name": "Schedules",
+	"short_name": "Horario 530A",
+	"description": "Una aplicacion para tener tus horarios a la mano",
+	"start_url": "./",
 	"display": "standalone",
 	"background_color": "#ffffff",
-	"theme_color": "#000000",
+	"theme_color": "#C4D097",
 	"icons": [
 	  {
 		"src": "icon.png",
