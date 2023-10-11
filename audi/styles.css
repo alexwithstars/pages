@@ -70,10 +70,9 @@
 /* Fonts */
 @font-face {
     font-family: 'Raleway';
-    src: url('assets/fonts/Raleway_font.ttf') format('ttf'),
-    url('assets/fonts/Raleway_font.woff2') format('woff2'),
-    url('assets/fonts/Raleway_font.woff') format('woff')
-    ;
+    src: url('assets/fonts/Raleway_font.woff2') format('woff2'),
+    url('assets/fonts/Raleway_font.woff') format('woff'),
+    url('assets/fonts/Raleway_font.ttf') format('ttf');
     font-display: swap;
     font-weight: normal;
     font-style: normal;
@@ -82,8 +81,7 @@
     font-family: 'Audi';
     src: url('assets/fonts/Audi_font.woff2') format('woff2'),
     url('assets/fonts/Audi_font.woff') format('woff'),
-    url('assets/fonts/Audi_font.ttf') format('ttf')
-    ;
+    url('assets/fonts/Audi_font.ttf') format('ttf');
     font-display: swap;
     font-weight: normal;
     font-style: normal;

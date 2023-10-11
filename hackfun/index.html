@@ -39,7 +39,6 @@
 
 		async function display(text="Hola mundo"){
 			await delay(1000)
-			console.clear()
 			if(typeof text != "string"){
 				text="Hola mundo"
 			}
@@ -73,8 +72,7 @@
 						position:fixed;
 						right:20px;
 						top:20px;
-						background:#222;
-						opacity:0.5;
+						background:#666;
 						display:grid;
 						place-items:center;
 						cursor:pointer;
@@ -89,7 +87,7 @@
 						&::after{
 							height:40%;
 							width:40%;
-							background:#222;
+							background:#666;
 						}
 					}
 				</style>
@@ -125,7 +123,6 @@
 			again.classList.add("x2")
 			document.body.appendChild(again)
 			again.addEventListener("click",()=>display(prompt("Aqui va el texto que quieras")))
-			console.log("%cdone","color:#0f0")
 		}
 		let text = "Hola mundo"
 		display(text)
