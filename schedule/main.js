@@ -130,7 +130,7 @@ const curSchedule=gti("schedule")
 const ntt=n=>n<10?`0${n}`:n // number to time
 const ttm=(h,m)=>h*60+m // time to minutes
 const mtt=(n)=>[Math.floor(n/60),n%60] // minutes to time
-const time=new Date()
+let time=new Date()
 function genClass(curD,times,...classes){
 	let el = document.createElement("div")
 	el.classList.add("day-class")
