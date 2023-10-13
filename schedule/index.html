@@ -8,30 +8,47 @@
 	<title>Schedules</title>
 </head>
 <body>
-	<div class="hide">
+	<!-- assets -->
+	<div class="hide" id="assets">
 		<div class="all-title" id="all-title"><h3>Todas</h3></div>
 		<div class="now-title" id="now-title"><h3>Actual</h3></div>
 		<div class="comming-title" id="comming-title"><h3>Siguiente</h3></div>
+		<div class="nyans" id="nyans">
+			<img class="nyan" src="assets/images/nyan.gif" alt="nyan cat">
+			<img class="nyan" src="assets/images/nyan.gif" alt="nyan cat">
+			<img class="nyan" src="assets/images/nyan.gif" alt="nyan cat">
+		</div>
+		<div class="day-end" id="dayEnded">Tu dia terminó</div>
 	</div>
+
+	<!-- menu -->
 	<nav class="groups" id="groups">
 		<div class="clase">hola</div>
 	</nav>
+	<!-- menu::button -->
 	<div title="groups" class="menu" id="menu">
 		<span class="b1" id="b1"></span>
 		<span class="b2" id="b2"></span>
 	</div>
+
+	<!-- Main page -->
 	<main>
+		<!-- Banner -->
 		<section class="top">
 			<div class="title-text">
 				<h1>530A</h1>
 			</div>
 			<div class="btop">
-				<h2 class="title-day" id="curDay"><span id="drop" class="drop"></span>Hoy</h2>
+				<h2 class="title-day" id="titleDay">
+					<span id="drop" class="drop"></span>
+					<span id="curDay" class="cur-day">Hoy</span>
+					<span id="groupSplash" class="group-splash">530A</span>
+				</h2>
 			</div>
 		</section>
-		<section class="schedule">
-			<div class="today" id="today">
-			</div>
+
+		<!-- Day schedule -->
+		<section class="schedule" id="schedule">
 		</section>
 	</main>
 	<script src="main.js" type="text/javascript"></script>

@@ -122,7 +122,11 @@ menu.addEventListener("click",()=>{
 const nowTitle=gti("now-title").cloneNode(true)
 const commingTitle=gti("comming-title").cloneNode(true)
 const allTitle=gti("all-title").cloneNode(true)
-const today=gti("today")
+const nyans=gti("nyans").cloneNode(true)
+const dayEnded=gti("dayEnded").cloneNode(true)
+const assets=gti("assets")
+document.body.removeChild(assets)
+const curSchedule=gti("schedule")
 const ntt=n=>n<10?`0${n}`:n // number to time
 const ttm=(h,m)=>h*60+m // time to minutes
 const mtt=(n)=>[Math.floor(n/60),n%60] // minutes to time
@@ -147,30 +151,38 @@ function genClass(curD,times,...classes){
 	return el
 }
 function createClasses(day){
-	today.innerHTML=""
+	curSchedule.innerHTML=""
 	let frag = document.createDocumentFragment()
 	let dayEnd=9
 	let dayStart=0
 	let curT=ttm(time.getHours(),time.getMinutes())
+	// curT=ttm(7,40)
 	while(day[dayEnd]=="null") dayEnd--
 	while(dayStart<day.length && day[dayStart]=="null") dayStart++
 	while(dayStart<ctimes.length && curT>=ctimes[dayStart].to) dayStart++
-	if( curT > ctimes[dayEnd].to ){
+	if(curT>=ctimes[dayEnd].to){
+		curSchedule.appendChild(dayEnded)
 		return
 	}
 	let prep=false,pprep=false
 	for(let i=dayStart;i<=dayEnd;i++){
 		let curD=day[i]
 		let classes=[]
+		let cont=document.createElement("div")
+		cont.classList.add("class-container")
+		if(pprep){
+			pprep=false
+			cont.appendChild(allTitle)
+		}
 		if(prep){
-			frag.appendChild(commingTitle)
+			cont.appendChild(commingTitle)
 			classes.push("comming")
 			prep=false
 			pprep=true
 		}
 		if(i==dayStart){
 			if(curT>=ctimes[dayStart].from){
-				frag.appendChild(nowTitle)
+				cont.appendChild(nowTitle)
 				classes.push("now")
 				if(dayStart<=dayEnd){
 					prep=true
@@ -184,35 +196,42 @@ function createClasses(day){
 			curD={class:"Clase Libre",teacher:"¡Disfruta!"}
 			classes.push("free")
 		}
-		frag.appendChild(genClass(curD,ctimes[i],...classes))
-		if(pprep){
-			pprep=false
-			frag.appendChild(allTitle)
-		}
+		cont.appendChild(genClass(curD,ctimes[i],...classes))
+		frag.appendChild(cont)
 	}
-	today.appendChild(frag)
+	let line=document.createElement("div")
+	line.classList.add("endline")
+	frag.appendChild(line)
+	frag.appendChild(nyans)
+	curSchedule.appendChild(frag)
 }
 
-function getSchedule(){
+function getTodaySchedule(){
 	if(time.getDay()==0 || time.getDay()==6){
 		return
 	}
 	createClasses(schedule[time.getDay()])
 }
 
-getSchedule()
+getTodaySchedule()
+let update=setInterval(getTodaySchedule,30000)
+
 
 // animacion del dia actual
-const curDay=gti("curDay")
+const titleDay=gti("titleDay")
 const drop=gti("drop")
+const groupSplash=gti("groupSplash")
 const observer = new IntersectionObserver((entries)=>{
 	entries.forEach((entrie)=>{
 		if(entrie.isIntersecting){
 			drop.style.scale=1
+			groupSplash.style.opacity=1
+			titleDay.scrollIntoView({behavior:"smooth"})
 		}
 		else{
+			groupSplash.style.opacity=0
 			drop.style.scale=0
 		}
 	})
-},{rootMargin:`0px 0px -${window.innerHeight-1}px 0px`,root:null})
-observer.observe(curDay)
+},{rootMargin:`0px 0px -${window.visualViewport.height-1}px 0px`,root:null})
+observer.observe(titleDay)

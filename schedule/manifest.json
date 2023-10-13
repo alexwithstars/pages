@@ -1,10 +1,10 @@
 {
-	"name": "Schedules",
-	"short_name": "Horario 530A",
+	"name": "SchedTem",
+	"short_name": "SchedTem",
 	"description": "Una aplicacion para tener tus horarios a la mano",
 	"start_url": "./",
 	"display": "standalone",
-	"background_color": "#222222",
+	"background_color": "#101010",
 	"theme_color": "#C4D097",
 	"icons": [
 	  {
