@@ -1,2 +1,2 @@
 # pages
-Mi pages :3
+My pages :3

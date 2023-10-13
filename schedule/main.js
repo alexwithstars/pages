@@ -151,6 +151,7 @@ function genClass(curD,times,...classes){
 	return el
 }
 function createClasses(day){
+	time=new Date()
 	curSchedule.innerHTML=""
 	let frag = document.createDocumentFragment()
 	let dayEnd=9
